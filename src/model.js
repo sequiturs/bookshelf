@@ -1029,7 +1029,7 @@ const BookshelfModel = ModelBase.extend({
          * @param {Object} options  Options object passed to {@link Model#save save}.
          * @returns {Promise}
          */
-        return this.triggerThen((method === 'insert' ? 'created saved' : 'updated saved'), this, resp, options);
+        return this.triggerThen((method === 'insert' ? 'beforePostSaveEvents created saved' : 'beforePostSaveEvents updated saved'), this, resp, options);
       });
     })
     .return(this);
