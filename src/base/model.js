@@ -209,7 +209,13 @@ ModelBase.prototype.set = function(key, val, options) {
  * modelB.isNew(); // false
  */
 ModelBase.prototype.isNew = function() {
-  return this.id == null;
+  // Support composite primary keys: model will be considered new if any of
+  // the values for attributes in the composite primary key are null.
+  if (Array.isArray(this.idAttribute)) {
+    return this.idAttribute.some(attr => this.get(attr) == null);
+  } else {
+    return this.id == null;
+  }
 };
 
 /**
